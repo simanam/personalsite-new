@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { Navigation, Hero, About, Expertise, Projects, Contact, Footer } from '@/components'
-import ChatBot from '@/components/ChatBot'
 
 export default function Home() {
   const [isThinking, setIsThinking] = useState(false)
@@ -10,13 +9,12 @@ export default function Home() {
   return (
     <main className="relative">
       <Navigation />
-      <Hero isThinking={isThinking} />
+      <Hero isThinking={isThinking} setIsThinking={setIsThinking} />
       <About />
       <Expertise />
       <Projects />
       <Contact />
       <Footer />
-      <ChatBot isThinking={isThinking} setIsThinking={setIsThinking} />
     </main>
   )
 }

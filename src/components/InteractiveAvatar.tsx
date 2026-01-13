@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { motion, useAnimation, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
+import { motion, useAnimation, useMotionValue, useSpring } from 'framer-motion'
 
 type Expression = 'neutral' | 'happy' | 'curious' | 'wink' | 'crosseyed'
 
@@ -384,55 +384,6 @@ export default function InteractiveAvatar({ isThinking = false }: InteractiveAva
           <path d="M267.079 193.544L268.034 195.059L268.823 193.452C276.078 178.673 291.217 168.514 308.712 168.514C325.23 168.514 339.647 177.57 347.313 191.02L347.697 191.695L348.446 191.489C348.759 191.403 349.089 191.357 349.432 191.357H364.583C366.641 191.357 368.318 193.035 368.318 195.116C368.318 197.197 366.641 198.875 364.583 198.875H352.203H350.855L351.246 200.165C352.495 204.288 353.167 208.664 353.167 213.2C353.167 237.884 333.259 257.886 308.712 257.886C284.165 257.886 264.258 237.884 264.258 213.2C264.258 210.551 264.487 207.957 264.926 205.436L264.943 205.341L264.941 205.245C264.771 196.43 258.015 189.357 249.739 189.357C242.108 189.357 235.764 195.378 234.694 203.224L234.67 203.399L234.708 203.572C235.385 206.672 235.742 209.894 235.742 213.2C235.742 237.884 215.835 257.886 191.288 257.886C166.741 257.886 146.833 237.884 146.833 213.2C146.833 208.664 147.505 204.288 148.754 200.165L149.145 198.875H147.797H135.417C133.359 198.875 131.682 197.197 131.682 195.116C131.682 193.035 133.359 191.357 135.417 191.357H150.568C150.911 191.357 151.241 191.403 151.554 191.489L152.303 191.695L152.687 191.02C160.353 177.57 174.77 168.514 191.288 168.514C208.606 168.514 223.616 178.47 230.955 193.006L231.73 194.542L232.681 193.108C236.446 187.433 242.691 183.743 249.739 183.743C256.967 183.743 263.35 187.623 267.079 193.544ZM191.288 252.271C212.765 252.271 230.167 234.774 230.167 213.2C230.167 191.626 212.765 174.129 191.288 174.129C169.811 174.129 152.409 191.626 152.409 213.2C152.409 234.774 169.811 252.271 191.288 252.271ZM308.712 252.271C330.189 252.271 347.591 234.774 347.591 213.2C347.591 191.626 330.189 174.129 308.712 174.129C287.235 174.129 269.833 191.626 269.833 213.2C269.833 234.774 287.235 252.271 308.712 252.271Z" fill="#AADCEC" stroke="#7F00E0" strokeWidth="2"/>
         </g>
       </svg>
-
-      {/* Thinking cloud when AI is processing */}
-      <AnimatePresence>
-        {isThinking && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.5, y: 20 }}
-            transition={{ duration: 0.3 }}
-            className="absolute -top-8 -right-8 z-10"
-          >
-            {/* Thought bubble trail */}
-            <motion.div
-              className="absolute bottom-0 left-4 w-3 h-3 bg-white rounded-full border-2 border-purple/30"
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            />
-            <motion.div
-              className="absolute bottom-4 left-8 w-4 h-4 bg-white rounded-full border-2 border-purple/30"
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 1, repeat: Infinity, delay: 0.1 }}
-            />
-            {/* Main thought cloud */}
-            <motion.div
-              className="relative bg-white rounded-2xl px-4 py-3 shadow-lg border-2 border-purple/20 ml-8"
-              animate={{ y: [0, -3, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <div className="flex items-center gap-1">
-                <motion.span
-                  className="w-2 h-2 bg-purple rounded-full"
-                  animate={{ scale: [1, 1.3, 1] }}
-                  transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
-                />
-                <motion.span
-                  className="w-2 h-2 bg-purple rounded-full"
-                  animate={{ scale: [1, 1.3, 1] }}
-                  transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
-                />
-                <motion.span
-                  className="w-2 h-2 bg-purple rounded-full"
-                  animate={{ scale: [1, 1.3, 1] }}
-                  transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
-                />
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Floating particles around avatar */}
       <motion.div

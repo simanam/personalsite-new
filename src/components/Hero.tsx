@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import InteractiveAvatar from './InteractiveAvatar'
+import AvatarChat from './AvatarChat'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -34,10 +34,11 @@ const skills = [
 ]
 
 interface HeroProps {
-  isThinking?: boolean
+  isThinking: boolean
+  setIsThinking: (value: boolean) => void
 }
 
-export default function Hero({ isThinking = false }: HeroProps) {
+export default function Hero({ isThinking, setIsThinking }: HeroProps) {
   return (
     <section id="home" className="min-h-screen mesh-bg relative overflow-hidden pt-20">
       {/* Background decorative elements */}
@@ -171,7 +172,7 @@ export default function Hero({ isThinking = false }: HeroProps) {
             </motion.div>
           </motion.div>
 
-          {/* Avatar */}
+          {/* Avatar with integrated chat */}
           <motion.div
             className="flex-1 flex justify-center lg:justify-end"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -190,7 +191,7 @@ export default function Hero({ isThinking = false }: HeroProps) {
               />
               {/* Glow effect behind avatar */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple/20 to-teal/20 rounded-full blur-3xl scale-110" />
-              <InteractiveAvatar isThinking={isThinking} />
+              <AvatarChat isThinking={isThinking} setIsThinking={setIsThinking} />
             </div>
           </motion.div>
         </div>
