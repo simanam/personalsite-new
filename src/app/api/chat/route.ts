@@ -1,4 +1,4 @@
-import Anthropic from '@anthropic-ai/sdk'
+import OpenAI from 'openai'
 import { NextRequest, NextResponse } from 'next/server'
 
 // Rate limiting: simple in-memory store (resets on server restart)
@@ -114,22 +114,25 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const apiKey = process.env.ANTHROPIC_API_KEY
+    const apiKey = process.env.OPENAI_API_KEY
     if (!apiKey) {
-      console.error('ANTHROPIC_API_KEY not configured')
+      console.error('OPENAI_API_KEY not configured')
       return NextResponse.json(
         { error: 'Chat service is not configured. Please try again later.' },
         { status: 500 }
       )
     }
 
-    const anthropic = new Anthropic({ apiKey })
+    const openai = new OpenAI({ apiKey })
 
-    const response = await anthropic.messages.create({
-      model: 'claude-3-haiku-20240307', // Fast and cost-effective for this use case
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4o-mini', // Fast and cost-effective
       max_tokens: 300,
-      system: SYSTEM_PROMPT,
       messages: [
+        {
+          role: 'system',
+          content: SYSTEM_PROMPT,
+        },
         {
           role: 'user',
           content: message,
@@ -137,15 +140,15 @@ export async function POST(request: NextRequest) {
       ],
     })
 
-    const assistantMessage = response.content[0]
-    if (assistantMessage.type !== 'text') {
+    const assistantMessage = response.choices[0]?.message?.content
+    if (!assistantMessage) {
       return NextResponse.json(
         { error: 'Unexpected response format.' },
         { status: 500 }
       )
     }
 
-    return NextResponse.json({ response: assistantMessage.text })
+    return NextResponse.json({ response: assistantMessage })
   } catch (error) {
     console.error('Chat API error:', error)
     return NextResponse.json(

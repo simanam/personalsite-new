@@ -9,7 +9,7 @@ Deployed on Vercel (link to be updated after deployment)
 ## Features
 
 - **Interactive Avatar** - SVG avatar with mouse-tracking eyes, natural eyebrow movement, and fun expressions
-- **AI Chatbot** - Ask questions about my career, powered by Claude API with thinking cloud animation
+- **AI Chatbot** - Ask questions about my career, powered by OpenAI with speech bubble and thinking cloud animation
 - **Smooth Animations** - Page transitions and scroll-triggered animations using Framer Motion
 - **Responsive Design** - Mobile-first design that works across all devices
 - **Glassmorphism UI** - Modern glass-effect components with subtle shadows
@@ -21,7 +21,7 @@ Deployed on Vercel (link to be updated after deployment)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
-- **AI**: Claude API (Anthropic)
+- **AI**: OpenAI GPT-4o-mini
 - **Deployment**: Vercel
 
 ## Getting Started
@@ -30,7 +30,7 @@ Deployed on Vercel (link to be updated after deployment)
 
 - Node.js 18+
 - npm or yarn
-- Anthropic API key (for chatbot)
+- OpenAI API key (for chatbot)
 
 ### Installation
 
@@ -46,7 +46,7 @@ npm install
 
 # Copy environment file and add your API key
 cp .env.example .env.local
-# Edit .env.local and add your ANTHROPIC_API_KEY
+# Edit .env.local and add your OPENAI_API_KEY
 
 # Start development server
 npm run dev
@@ -71,13 +71,13 @@ src/
 ├── app/
 │   ├── api/
 │   │   └── chat/
-│   │       └── route.ts      # AI chatbot API endpoint
+│   │       └── route.ts      # AI chatbot API endpoint (OpenAI)
 │   ├── globals.css           # Global styles and Tailwind config
 │   ├── layout.tsx            # Root layout with SEO metadata
 │   └── page.tsx              # Main page component
 ├── components/
-│   ├── InteractiveAvatar.tsx # Animated SVG avatar with thinking cloud
-│   ├── ChatBot.tsx           # AI chatbot UI component
+│   ├── InteractiveAvatar.tsx # Animated SVG avatar
+│   ├── AvatarChat.tsx        # Integrated chat with speech bubble
 │   ├── Navigation.tsx        # Responsive navbar
 │   ├── Hero.tsx              # Hero section
 │   ├── About.tsx             # About & timeline
@@ -97,7 +97,7 @@ public/
 1. Push this repo to GitHub
 2. Go to [vercel.com](https://vercel.com) and import the project
 3. Add environment variable:
-   - `ANTHROPIC_API_KEY`: Your Anthropic API key
+   - `OPENAI_API_KEY`: Your OpenAI API key
 4. Deploy!
 
 ## AI Chatbot Features
