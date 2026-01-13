@@ -14,8 +14,8 @@ const inter = Inter({
   display: 'swap',
 })
 
-const basePath = process.env.NODE_ENV === 'production' ? '/aman-singh' : ''
-const siteUrl = 'https://simanam.github.io/aman-singh'
+// Will be updated with custom domain once set up on Vercel
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aman-singh.vercel.app'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   creator: 'Aman Singh',
   publisher: 'Aman Singh',
   icons: {
-    icon: `${basePath}/favicon.svg`,
-    apple: `${basePath}/favicon.svg`,
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
   },
   openGraph: {
     title: 'Aman Singh | Enterprise AI Systems Designer',
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     siteName: 'Aman Singh Portfolio',
     images: [
       {
-        url: `${basePath}/og-image.png`,
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Aman Singh - Enterprise AI Systems Designer',
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Aman Singh | Enterprise AI Systems Designer',
     description: 'Building production AI platforms with data governance, compliance, and security at scale.',
-    images: [`${basePath}/og-image.png`],
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,

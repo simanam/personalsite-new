@@ -3,8 +3,6 @@
 import { motion } from 'framer-motion'
 import InteractiveAvatar from './InteractiveAvatar'
 
-const basePath = process.env.NODE_ENV === 'production' ? '/aman-singh' : ''
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -35,7 +33,11 @@ const skills = [
   'Compliance Design',
 ]
 
-export default function Hero() {
+interface HeroProps {
+  isThinking?: boolean
+}
+
+export default function Hero({ isThinking = false }: HeroProps) {
   return (
     <section id="home" className="min-h-screen mesh-bg relative overflow-hidden pt-20">
       {/* Background decorative elements */}
@@ -181,14 +183,14 @@ export default function Hero() {
               <div
                 className="absolute -inset-8 opacity-30"
                 style={{
-                  backgroundImage: `url(${basePath}/background.svg)`,
+                  backgroundImage: 'url(/background.svg)',
                   backgroundRepeat: 'repeat',
                   backgroundSize: '160px auto',
                 }}
               />
               {/* Glow effect behind avatar */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple/20 to-teal/20 rounded-full blur-3xl scale-110" />
-              <InteractiveAvatar />
+              <InteractiveAvatar isThinking={isThinking} />
             </div>
           </motion.div>
         </div>
